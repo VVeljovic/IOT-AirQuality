@@ -8,6 +8,8 @@ service AirQuality {
 	rpc getDataById(DataId) returns (AirDataQuality){}
 	rpc createData(AirDataQuality) returns (AirDataQuality){}
 	rpc deleteData(DataId) returns (google.protobuf.Empty);
+	rpc updateData(AirDataQuality) returns (AirDataQuality){}
+
 
 }
 message Hellow {

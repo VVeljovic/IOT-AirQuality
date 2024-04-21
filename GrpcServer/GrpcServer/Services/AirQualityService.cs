@@ -3,6 +3,7 @@ using Grpc.Core;
 using GrpcServer.ContextDB;
 using GrpcServer.Models;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GrpcServer.Services
 {
@@ -105,9 +106,34 @@ namespace GrpcServer.Services
 
            
         }
-        public override Task<AirDataQuality> updateData(AirDataQuality request, ServerCallContext context)
+        public override async Task<AirDataQuality> updateData(AirDataQuality request, ServerCallContext context)
         {
-            return base.updateData(request, context);
+            var data = await DBContext.airQualities.FindAsync(request.Id);
+            if(data == null)
+            {
+                throw new RpcException(new Status(StatusCode.NotFound, "Data not found"));
+            }
+            else
+            {
+                data.Date = request.Date.ToDateTime();
+                data.Time = request.Time.ToTimeSpan();
+                data.CO_GT = request.CoGt;
+                data.PT08_S1_CO = request.Pt08S1Co;
+                data.NMHC_GT = request.NmhcGt;
+                data.C6H6_GT = request.C6H6Gt;
+                data.PT08_S2_NMHC = request.Pt08S2Nmhc;
+                data.NOx_GT = request.NoxGt;
+                data.PT08_S3_NOx = request.Pt08S3Nox;
+                data.NO2_GT = request.No2Gt;
+                data.PT08_S4_NO2 = request.Pt08S4No2;
+                data.PT08_S5_O3 = request.Pt08S5O3;
+                data.T = request.T;
+                data.RH = request.Rh;
+                data.AH = request.Ah;
+                await DBContext.SaveChangesAsync();
+                return await Task.FromResult(request);
+
+            }
         }
 
     }
