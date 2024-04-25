@@ -3,7 +3,7 @@ import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 option java_multiple_files = true;
-option java_package ="GrpcServer";
+option java_package ="iot.rest.grpc";
 service AirQuality {
 
   rpc getDataById(DataId) returns (AirDataQuality){}
