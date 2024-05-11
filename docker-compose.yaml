@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  database:
+    container_name: postgres_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: iot
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Veljko22!!!
+    ports:
+      - "5433:5432"
+    networks:
+      - iot
+ 
+networks:
+  iot:
+    name: iot
+   
