@@ -28,7 +28,10 @@ public class AirQualityController {
 
     @GetMapping("/getData/{id}")
     public ResponseEntity<String> getDataById(@PathVariable Integer id) {
+        System.out.print("cao");
         AirDataQuality data = restClient.getDataById(id);
+            System.out.print("2222222222");
+
         try{
             String jsonData = JsonFormat.printer().print(data);
             return ResponseEntity.ok(jsonData);

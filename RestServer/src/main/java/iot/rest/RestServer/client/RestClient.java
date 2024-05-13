@@ -14,7 +14,7 @@ public class RestClient {
     private ManagedChannel channel;
     private AirQualityGrpc.AirQualityBlockingStub blockingStub;
     public RestClient() {
-        this.channel = ManagedChannelBuilder.forAddress("127.0.0.1", 5259).usePlaintext().build();
+        this.channel = ManagedChannelBuilder.forAddress("127.0.0.1", 8080).usePlaintext().build();
         this.blockingStub = AirQualityGrpc.newBlockingStub(channel);
     }
     public AirDataQuality getDataById(int id)

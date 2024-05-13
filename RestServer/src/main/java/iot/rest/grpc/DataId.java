@@ -18,7 +18,7 @@ public  final class DataId extends
     id_ = 0;
   }
 
-  @java.lang.Override
+  @Override
   public final com.google.protobuf.UnknownFieldSet
   getUnknownFields() {
     return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -61,14 +61,14 @@ public  final class DataId extends
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return iot.rest.grpc.Airquality.internal_static_DataId_descriptor;
+    return Airquality.internal_static_DataId_descriptor;
   }
 
-  protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  protected FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return iot.rest.grpc.Airquality.internal_static_DataId_fieldAccessorTable
+    return Airquality.internal_static_DataId_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            iot.rest.grpc.DataId.class, iot.rest.grpc.DataId.Builder.class);
+            DataId.class, Builder.class);
   }
 
   public static final int ID_FIELD_NUMBER = 1;
@@ -111,15 +111,15 @@ public  final class DataId extends
   }
 
   private static final long serialVersionUID = 0L;
-  @java.lang.Override
-  public boolean equals(final java.lang.Object obj) {
+  @Override
+  public boolean equals(final Object obj) {
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof iot.rest.grpc.DataId)) {
+    if (!(obj instanceof DataId)) {
       return super.equals(obj);
     }
-    iot.rest.grpc.DataId other = (iot.rest.grpc.DataId) obj;
+    DataId other = (DataId) obj;
 
     boolean result = true;
     result = result && (getId()
@@ -127,7 +127,7 @@ public  final class DataId extends
     return result;
   }
 
-  @java.lang.Override
+  @Override
   public int hashCode() {
     if (memoizedHashCode != 0) {
       return memoizedHashCode;
@@ -141,69 +141,69 @@ public  final class DataId extends
     return hash;
   }
 
-  public static iot.rest.grpc.DataId parseFrom(
+  public static DataId parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static iot.rest.grpc.DataId parseFrom(
+  public static DataId parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static iot.rest.grpc.DataId parseFrom(
+  public static DataId parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static iot.rest.grpc.DataId parseFrom(
+  public static DataId parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static iot.rest.grpc.DataId parseFrom(byte[] data)
+  public static DataId parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static iot.rest.grpc.DataId parseFrom(
+  public static DataId parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static iot.rest.grpc.DataId parseFrom(java.io.InputStream input)
+  public static DataId parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static iot.rest.grpc.DataId parseFrom(
+  public static DataId parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static iot.rest.grpc.DataId parseDelimitedFrom(java.io.InputStream input)
+  public static DataId parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static iot.rest.grpc.DataId parseDelimitedFrom(
+  public static DataId parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static iot.rest.grpc.DataId parseFrom(
+  public static DataId parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static iot.rest.grpc.DataId parseFrom(
+  public static DataId parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -215,7 +215,7 @@ public  final class DataId extends
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(iot.rest.grpc.DataId prototype) {
+  public static Builder newBuilder(DataId prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   public Builder toBuilder() {
@@ -223,9 +223,9 @@ public  final class DataId extends
         ? new Builder() : new Builder().mergeFrom(this);
   }
 
-  @java.lang.Override
+  @Override
   protected Builder newBuilderForType(
-      com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      BuilderParent parent) {
     Builder builder = new Builder(parent);
     return builder;
   }
@@ -235,17 +235,17 @@ public  final class DataId extends
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:DataId)
-      iot.rest.grpc.DataIdOrBuilder {
+      DataIdOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return iot.rest.grpc.Airquality.internal_static_DataId_descriptor;
+      return Airquality.internal_static_DataId_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return iot.rest.grpc.Airquality.internal_static_DataId_fieldAccessorTable
+      return Airquality.internal_static_DataId_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              iot.rest.grpc.DataId.class, iot.rest.grpc.DataId.Builder.class);
+              DataId.class, Builder.class);
     }
 
     // Construct using iot.rest.grpc.DataId.newBuilder()
@@ -254,7 +254,7 @@ public  final class DataId extends
     }
 
     private Builder(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       super(parent);
       maybeForceBuilderInitialization();
     }
@@ -272,23 +272,23 @@ public  final class DataId extends
 
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return iot.rest.grpc.Airquality.internal_static_DataId_descriptor;
+      return Airquality.internal_static_DataId_descriptor;
     }
 
-    public iot.rest.grpc.DataId getDefaultInstanceForType() {
-      return iot.rest.grpc.DataId.getDefaultInstance();
+    public DataId getDefaultInstanceForType() {
+      return DataId.getDefaultInstance();
     }
 
-    public iot.rest.grpc.DataId build() {
-      iot.rest.grpc.DataId result = buildPartial();
+    public DataId build() {
+      DataId result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
       return result;
     }
 
-    public iot.rest.grpc.DataId buildPartial() {
-      iot.rest.grpc.DataId result = new iot.rest.grpc.DataId(this);
+    public DataId buildPartial() {
+      DataId result = new DataId(this);
       result.id_ = id_;
       onBuilt();
       return result;
@@ -321,16 +321,16 @@ public  final class DataId extends
       return (Builder) super.addRepeatedField(field, value);
     }
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof iot.rest.grpc.DataId) {
-        return mergeFrom((iot.rest.grpc.DataId)other);
+      if (other instanceof DataId) {
+        return mergeFrom((DataId)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(iot.rest.grpc.DataId other) {
-      if (other == iot.rest.grpc.DataId.getDefaultInstance()) return this;
+    public Builder mergeFrom(DataId other) {
+      if (other == DataId.getDefaultInstance()) return this;
       if (other.getId() != 0) {
         setId(other.getId());
       }
@@ -346,11 +346,11 @@ public  final class DataId extends
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      iot.rest.grpc.DataId parsedMessage = null;
+      DataId parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (iot.rest.grpc.DataId) e.getUnfinishedMessage();
+        parsedMessage = (DataId) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -400,12 +400,12 @@ public  final class DataId extends
   }
 
   // @@protoc_insertion_point(class_scope:DataId)
-  private static final iot.rest.grpc.DataId DEFAULT_INSTANCE;
+  private static final DataId DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new iot.rest.grpc.DataId();
+    DEFAULT_INSTANCE = new DataId();
   }
 
-  public static iot.rest.grpc.DataId getDefaultInstance() {
+  public static DataId getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
@@ -423,12 +423,12 @@ public  final class DataId extends
     return PARSER;
   }
 
-  @java.lang.Override
+  @Override
   public com.google.protobuf.Parser<DataId> getParserForType() {
     return PARSER;
   }
 
-  public iot.rest.grpc.DataId getDefaultInstanceForType() {
+  public DataId getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

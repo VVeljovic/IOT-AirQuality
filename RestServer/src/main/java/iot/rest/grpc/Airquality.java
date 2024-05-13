@@ -32,7 +32,7 @@ public final class Airquality {
   private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    java.lang.String[] descriptorData = {
+    String[] descriptorData = {
       "\n\020airquality.proto\032\036google/protobuf/dura" +
       "tion.proto\032\037google/protobuf/timestamp.pr" +
       "oto\032\033google/protobuf/empty.proto\"\024\n\006Data" +
@@ -72,13 +72,13 @@ public final class Airquality {
     internal_static_DataId_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DataId_descriptor,
-        new java.lang.String[] { "Id", });
+        new String[] { "Id", });
     internal_static_AirDataQuality_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_AirDataQuality_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AirDataQuality_descriptor,
-        new java.lang.String[] { "Date", "Time", "CoGt", "Pt08S1Co", "NmhcGt", "C6H6Gt", "Pt08S2Nmhc", "NoxGt", "Pt08S3Nox", "No2Gt", "Pt08S4No2", "Pt08S5O3", "T", "Rh", "Ah", "Id", });
+        new String[] { "Date", "Time", "CoGt", "Pt08S1Co", "NmhcGt", "C6H6Gt", "Pt08S2Nmhc", "NoxGt", "Pt08S3Nox", "No2Gt", "Pt08S4No2", "Pt08S5O3", "T", "Rh", "Ah", "Id", });
     com.google.protobuf.DurationProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
     com.google.protobuf.EmptyProto.getDescriptor();

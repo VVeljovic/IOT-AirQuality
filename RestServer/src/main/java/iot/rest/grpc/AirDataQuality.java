@@ -31,7 +31,7 @@ public  final class AirDataQuality extends
     id_ = 0;
   }
 
-  @java.lang.Override
+  @Override
   public final com.google.protobuf.UnknownFieldSet
   getUnknownFields() {
     return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -165,14 +165,14 @@ public  final class AirDataQuality extends
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return iot.rest.grpc.Airquality.internal_static_AirDataQuality_descriptor;
+    return Airquality.internal_static_AirDataQuality_descriptor;
   }
 
-  protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  protected FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return iot.rest.grpc.Airquality.internal_static_AirDataQuality_fieldAccessorTable
+    return Airquality.internal_static_AirDataQuality_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            iot.rest.grpc.AirDataQuality.class, iot.rest.grpc.AirDataQuality.Builder.class);
+            AirDataQuality.class, Builder.class);
   }
 
   public static final int DATE_FIELD_NUMBER = 1;
@@ -479,15 +479,15 @@ public  final class AirDataQuality extends
   }
 
   private static final long serialVersionUID = 0L;
-  @java.lang.Override
-  public boolean equals(final java.lang.Object obj) {
+  @Override
+  public boolean equals(final Object obj) {
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof iot.rest.grpc.AirDataQuality)) {
+    if (!(obj instanceof AirDataQuality)) {
       return super.equals(obj);
     }
-    iot.rest.grpc.AirDataQuality other = (iot.rest.grpc.AirDataQuality) obj;
+    AirDataQuality other = (AirDataQuality) obj;
 
     boolean result = true;
     result = result && (hasDate() == other.hasDate());
@@ -501,16 +501,16 @@ public  final class AirDataQuality extends
           .equals(other.getTime());
     }
     result = result && (
-        java.lang.Float.floatToIntBits(getCoGt())
-        == java.lang.Float.floatToIntBits(
+        Float.floatToIntBits(getCoGt())
+        == Float.floatToIntBits(
             other.getCoGt()));
     result = result && (getPt08S1Co()
         == other.getPt08S1Co());
     result = result && (getNmhcGt()
         == other.getNmhcGt());
     result = result && (
-        java.lang.Float.floatToIntBits(getC6H6Gt())
-        == java.lang.Float.floatToIntBits(
+        Float.floatToIntBits(getC6H6Gt())
+        == Float.floatToIntBits(
             other.getC6H6Gt()));
     result = result && (getPt08S2Nmhc()
         == other.getPt08S2Nmhc());
@@ -525,23 +525,23 @@ public  final class AirDataQuality extends
     result = result && (getPt08S5O3()
         == other.getPt08S5O3());
     result = result && (
-        java.lang.Float.floatToIntBits(getT())
-        == java.lang.Float.floatToIntBits(
+        Float.floatToIntBits(getT())
+        == Float.floatToIntBits(
             other.getT()));
     result = result && (
-        java.lang.Float.floatToIntBits(getRh())
-        == java.lang.Float.floatToIntBits(
+        Float.floatToIntBits(getRh())
+        == Float.floatToIntBits(
             other.getRh()));
     result = result && (
-        java.lang.Float.floatToIntBits(getAh())
-        == java.lang.Float.floatToIntBits(
+        Float.floatToIntBits(getAh())
+        == Float.floatToIntBits(
             other.getAh()));
     result = result && (getId()
         == other.getId());
     return result;
   }
 
-  @java.lang.Override
+  @Override
   public int hashCode() {
     if (memoizedHashCode != 0) {
       return memoizedHashCode;
@@ -557,14 +557,14 @@ public  final class AirDataQuality extends
       hash = (53 * hash) + getTime().hashCode();
     }
     hash = (37 * hash) + CO_GT_FIELD_NUMBER;
-    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+    hash = (53 * hash) + Float.floatToIntBits(
         getCoGt());
     hash = (37 * hash) + PT08_S1_CO_FIELD_NUMBER;
     hash = (53 * hash) + getPt08S1Co();
     hash = (37 * hash) + NMHC_GT_FIELD_NUMBER;
     hash = (53 * hash) + getNmhcGt();
     hash = (37 * hash) + C6H6_GT_FIELD_NUMBER;
-    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+    hash = (53 * hash) + Float.floatToIntBits(
         getC6H6Gt());
     hash = (37 * hash) + PT08_S2_NMHC_FIELD_NUMBER;
     hash = (53 * hash) + getPt08S2Nmhc();
@@ -579,13 +579,13 @@ public  final class AirDataQuality extends
     hash = (37 * hash) + PT08_S5_O3_FIELD_NUMBER;
     hash = (53 * hash) + getPt08S5O3();
     hash = (37 * hash) + T_FIELD_NUMBER;
-    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+    hash = (53 * hash) + Float.floatToIntBits(
         getT());
     hash = (37 * hash) + RH_FIELD_NUMBER;
-    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+    hash = (53 * hash) + Float.floatToIntBits(
         getRh());
     hash = (37 * hash) + AH_FIELD_NUMBER;
-    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+    hash = (53 * hash) + Float.floatToIntBits(
         getAh());
     hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + getId();
@@ -594,69 +594,69 @@ public  final class AirDataQuality extends
     return hash;
   }
 
-  public static iot.rest.grpc.AirDataQuality parseFrom(
+  public static AirDataQuality parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static iot.rest.grpc.AirDataQuality parseFrom(
+  public static AirDataQuality parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static iot.rest.grpc.AirDataQuality parseFrom(
+  public static AirDataQuality parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static iot.rest.grpc.AirDataQuality parseFrom(
+  public static AirDataQuality parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static iot.rest.grpc.AirDataQuality parseFrom(byte[] data)
+  public static AirDataQuality parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static iot.rest.grpc.AirDataQuality parseFrom(
+  public static AirDataQuality parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static iot.rest.grpc.AirDataQuality parseFrom(java.io.InputStream input)
+  public static AirDataQuality parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static iot.rest.grpc.AirDataQuality parseFrom(
+  public static AirDataQuality parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static iot.rest.grpc.AirDataQuality parseDelimitedFrom(java.io.InputStream input)
+  public static AirDataQuality parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static iot.rest.grpc.AirDataQuality parseDelimitedFrom(
+  public static AirDataQuality parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static iot.rest.grpc.AirDataQuality parseFrom(
+  public static AirDataQuality parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static iot.rest.grpc.AirDataQuality parseFrom(
+  public static AirDataQuality parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -668,7 +668,7 @@ public  final class AirDataQuality extends
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(iot.rest.grpc.AirDataQuality prototype) {
+  public static Builder newBuilder(AirDataQuality prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   public Builder toBuilder() {
@@ -676,9 +676,9 @@ public  final class AirDataQuality extends
         ? new Builder() : new Builder().mergeFrom(this);
   }
 
-  @java.lang.Override
+  @Override
   protected Builder newBuilderForType(
-      com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      BuilderParent parent) {
     Builder builder = new Builder(parent);
     return builder;
   }
@@ -688,17 +688,17 @@ public  final class AirDataQuality extends
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:AirDataQuality)
-      iot.rest.grpc.AirDataQualityOrBuilder {
+      AirDataQualityOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return iot.rest.grpc.Airquality.internal_static_AirDataQuality_descriptor;
+      return Airquality.internal_static_AirDataQuality_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return iot.rest.grpc.Airquality.internal_static_AirDataQuality_fieldAccessorTable
+      return Airquality.internal_static_AirDataQuality_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              iot.rest.grpc.AirDataQuality.class, iot.rest.grpc.AirDataQuality.Builder.class);
+              AirDataQuality.class, Builder.class);
     }
 
     // Construct using iot.rest.grpc.AirDataQuality.newBuilder()
@@ -707,7 +707,7 @@ public  final class AirDataQuality extends
     }
 
     private Builder(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       super(parent);
       maybeForceBuilderInitialization();
     }
@@ -763,23 +763,23 @@ public  final class AirDataQuality extends
 
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return iot.rest.grpc.Airquality.internal_static_AirDataQuality_descriptor;
+      return Airquality.internal_static_AirDataQuality_descriptor;
     }
 
-    public iot.rest.grpc.AirDataQuality getDefaultInstanceForType() {
-      return iot.rest.grpc.AirDataQuality.getDefaultInstance();
+    public AirDataQuality getDefaultInstanceForType() {
+      return AirDataQuality.getDefaultInstance();
     }
 
-    public iot.rest.grpc.AirDataQuality build() {
-      iot.rest.grpc.AirDataQuality result = buildPartial();
+    public AirDataQuality build() {
+      AirDataQuality result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
       return result;
     }
 
-    public iot.rest.grpc.AirDataQuality buildPartial() {
-      iot.rest.grpc.AirDataQuality result = new iot.rest.grpc.AirDataQuality(this);
+    public AirDataQuality buildPartial() {
+      AirDataQuality result = new AirDataQuality(this);
       if (dateBuilder_ == null) {
         result.date_ = date_;
       } else {
@@ -835,16 +835,16 @@ public  final class AirDataQuality extends
       return (Builder) super.addRepeatedField(field, value);
     }
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof iot.rest.grpc.AirDataQuality) {
-        return mergeFrom((iot.rest.grpc.AirDataQuality)other);
+      if (other instanceof AirDataQuality) {
+        return mergeFrom((AirDataQuality)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(iot.rest.grpc.AirDataQuality other) {
-      if (other == iot.rest.grpc.AirDataQuality.getDefaultInstance()) return this;
+    public Builder mergeFrom(AirDataQuality other) {
+      if (other == AirDataQuality.getDefaultInstance()) return this;
       if (other.hasDate()) {
         mergeDate(other.getDate());
       }
@@ -905,11 +905,11 @@ public  final class AirDataQuality extends
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      iot.rest.grpc.AirDataQuality parsedMessage = null;
+      AirDataQuality parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (iot.rest.grpc.AirDataQuality) e.getUnfinishedMessage();
+        parsedMessage = (AirDataQuality) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -1531,12 +1531,12 @@ public  final class AirDataQuality extends
   }
 
   // @@protoc_insertion_point(class_scope:AirDataQuality)
-  private static final iot.rest.grpc.AirDataQuality DEFAULT_INSTANCE;
+  private static final AirDataQuality DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new iot.rest.grpc.AirDataQuality();
+    DEFAULT_INSTANCE = new AirDataQuality();
   }
 
-  public static iot.rest.grpc.AirDataQuality getDefaultInstance() {
+  public static AirDataQuality getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
@@ -1554,12 +1554,12 @@ public  final class AirDataQuality extends
     return PARSER;
   }
 
-  @java.lang.Override
+  @Override
   public com.google.protobuf.Parser<AirDataQuality> getParserForType() {
     return PARSER;
   }
 
-  public iot.rest.grpc.AirDataQuality getDefaultInstanceForType() {
+  public AirDataQuality getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

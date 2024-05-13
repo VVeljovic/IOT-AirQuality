@@ -28,52 +28,52 @@ public final class AirQualityGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<iot.rest.grpc.DataId,
-      iot.rest.grpc.AirDataQuality> METHOD_GET_DATA_BY_ID =
-      io.grpc.MethodDescriptor.<iot.rest.grpc.DataId, iot.rest.grpc.AirDataQuality>newBuilder()
+  public static final io.grpc.MethodDescriptor<DataId,
+      AirDataQuality> METHOD_GET_DATA_BY_ID =
+      io.grpc.MethodDescriptor.<DataId, AirDataQuality>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
               "AirQuality", "getDataById"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              iot.rest.grpc.DataId.getDefaultInstance()))
+              DataId.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              iot.rest.grpc.AirDataQuality.getDefaultInstance()))
+              AirDataQuality.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<iot.rest.grpc.AirDataQuality,
-      iot.rest.grpc.AirDataQuality> METHOD_CREATE_DATA =
-      io.grpc.MethodDescriptor.<iot.rest.grpc.AirDataQuality, iot.rest.grpc.AirDataQuality>newBuilder()
+  public static final io.grpc.MethodDescriptor<AirDataQuality,
+      AirDataQuality> METHOD_CREATE_DATA =
+      io.grpc.MethodDescriptor.<AirDataQuality, AirDataQuality>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
               "AirQuality", "createData"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              iot.rest.grpc.AirDataQuality.getDefaultInstance()))
+              AirDataQuality.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              iot.rest.grpc.AirDataQuality.getDefaultInstance()))
+              AirDataQuality.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<iot.rest.grpc.DataId,
+  public static final io.grpc.MethodDescriptor<DataId,
       com.google.protobuf.Empty> METHOD_DELETE_DATA =
-      io.grpc.MethodDescriptor.<iot.rest.grpc.DataId, com.google.protobuf.Empty>newBuilder()
+      io.grpc.MethodDescriptor.<DataId, com.google.protobuf.Empty>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
               "AirQuality", "deleteData"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              iot.rest.grpc.DataId.getDefaultInstance()))
+              DataId.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.google.protobuf.Empty.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<iot.rest.grpc.AirDataQuality,
-      iot.rest.grpc.AirDataQuality> METHOD_UPDATE_DATA =
-      io.grpc.MethodDescriptor.<iot.rest.grpc.AirDataQuality, iot.rest.grpc.AirDataQuality>newBuilder()
+  public static final io.grpc.MethodDescriptor<AirDataQuality,
+      AirDataQuality> METHOD_UPDATE_DATA =
+      io.grpc.MethodDescriptor.<AirDataQuality, AirDataQuality>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
               "AirQuality", "updateData"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              iot.rest.grpc.AirDataQuality.getDefaultInstance()))
+              AirDataQuality.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              iot.rest.grpc.AirDataQuality.getDefaultInstance()))
+              AirDataQuality.getDefaultInstance()))
           .build();
 
   /**
@@ -105,61 +105,61 @@ public final class AirQualityGrpc {
 
     /**
      */
-    public void getDataById(iot.rest.grpc.DataId request,
-        io.grpc.stub.StreamObserver<iot.rest.grpc.AirDataQuality> responseObserver) {
+    public void getDataById(DataId request,
+                            io.grpc.stub.StreamObserver<AirDataQuality> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_GET_DATA_BY_ID, responseObserver);
     }
 
     /**
      */
-    public void createData(iot.rest.grpc.AirDataQuality request,
-        io.grpc.stub.StreamObserver<iot.rest.grpc.AirDataQuality> responseObserver) {
+    public void createData(AirDataQuality request,
+                           io.grpc.stub.StreamObserver<AirDataQuality> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_CREATE_DATA, responseObserver);
     }
 
     /**
      */
-    public void deleteData(iot.rest.grpc.DataId request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+    public void deleteData(DataId request,
+                           io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_DELETE_DATA, responseObserver);
     }
 
     /**
      */
-    public void updateData(iot.rest.grpc.AirDataQuality request,
-        io.grpc.stub.StreamObserver<iot.rest.grpc.AirDataQuality> responseObserver) {
+    public void updateData(AirDataQuality request,
+                           io.grpc.stub.StreamObserver<AirDataQuality> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_UPDATE_DATA, responseObserver);
     }
 
-    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
+    @Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             METHOD_GET_DATA_BY_ID,
             asyncUnaryCall(
               new MethodHandlers<
-                iot.rest.grpc.DataId,
-                iot.rest.grpc.AirDataQuality>(
+                DataId,
+                AirDataQuality>(
                   this, METHODID_GET_DATA_BY_ID)))
           .addMethod(
             METHOD_CREATE_DATA,
             asyncUnaryCall(
               new MethodHandlers<
-                iot.rest.grpc.AirDataQuality,
-                iot.rest.grpc.AirDataQuality>(
+                AirDataQuality,
+                AirDataQuality>(
                   this, METHODID_CREATE_DATA)))
           .addMethod(
             METHOD_DELETE_DATA,
             asyncUnaryCall(
               new MethodHandlers<
-                iot.rest.grpc.DataId,
+                DataId,
                 com.google.protobuf.Empty>(
                   this, METHODID_DELETE_DATA)))
           .addMethod(
             METHOD_UPDATE_DATA,
             asyncUnaryCall(
               new MethodHandlers<
-                iot.rest.grpc.AirDataQuality,
-                iot.rest.grpc.AirDataQuality>(
+                AirDataQuality,
+                AirDataQuality>(
                   this, METHODID_UPDATE_DATA)))
           .build();
     }
@@ -177,7 +177,7 @@ public final class AirQualityGrpc {
       super(channel, callOptions);
     }
 
-    @java.lang.Override
+    @Override
     protected AirQualityStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new AirQualityStub(channel, callOptions);
@@ -185,32 +185,32 @@ public final class AirQualityGrpc {
 
     /**
      */
-    public void getDataById(iot.rest.grpc.DataId request,
-        io.grpc.stub.StreamObserver<iot.rest.grpc.AirDataQuality> responseObserver) {
+    public void getDataById(DataId request,
+                            io.grpc.stub.StreamObserver<AirDataQuality> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_GET_DATA_BY_ID, getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void createData(iot.rest.grpc.AirDataQuality request,
-        io.grpc.stub.StreamObserver<iot.rest.grpc.AirDataQuality> responseObserver) {
+    public void createData(AirDataQuality request,
+                           io.grpc.stub.StreamObserver<AirDataQuality> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_CREATE_DATA, getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void deleteData(iot.rest.grpc.DataId request,
-        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+    public void deleteData(DataId request,
+                           io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_DELETE_DATA, getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void updateData(iot.rest.grpc.AirDataQuality request,
-        io.grpc.stub.StreamObserver<iot.rest.grpc.AirDataQuality> responseObserver) {
+    public void updateData(AirDataQuality request,
+                           io.grpc.stub.StreamObserver<AirDataQuality> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_UPDATE_DATA, getCallOptions()), request, responseObserver);
     }
@@ -228,7 +228,7 @@ public final class AirQualityGrpc {
       super(channel, callOptions);
     }
 
-    @java.lang.Override
+    @Override
     protected AirQualityBlockingStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new AirQualityBlockingStub(channel, callOptions);
@@ -236,28 +236,28 @@ public final class AirQualityGrpc {
 
     /**
      */
-    public iot.rest.grpc.AirDataQuality getDataById(iot.rest.grpc.DataId request) {
+    public AirDataQuality getDataById(DataId request) {
       return blockingUnaryCall(
           getChannel(), METHOD_GET_DATA_BY_ID, getCallOptions(), request);
     }
 
     /**
      */
-    public iot.rest.grpc.AirDataQuality createData(iot.rest.grpc.AirDataQuality request) {
+    public AirDataQuality createData(AirDataQuality request) {
       return blockingUnaryCall(
           getChannel(), METHOD_CREATE_DATA, getCallOptions(), request);
     }
 
     /**
      */
-    public com.google.protobuf.Empty deleteData(iot.rest.grpc.DataId request) {
+    public com.google.protobuf.Empty deleteData(DataId request) {
       return blockingUnaryCall(
           getChannel(), METHOD_DELETE_DATA, getCallOptions(), request);
     }
 
     /**
      */
-    public iot.rest.grpc.AirDataQuality updateData(iot.rest.grpc.AirDataQuality request) {
+    public AirDataQuality updateData(AirDataQuality request) {
       return blockingUnaryCall(
           getChannel(), METHOD_UPDATE_DATA, getCallOptions(), request);
     }
@@ -275,7 +275,7 @@ public final class AirQualityGrpc {
       super(channel, callOptions);
     }
 
-    @java.lang.Override
+    @Override
     protected AirQualityFutureStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new AirQualityFutureStub(channel, callOptions);
@@ -283,16 +283,16 @@ public final class AirQualityGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<iot.rest.grpc.AirDataQuality> getDataById(
-        iot.rest.grpc.DataId request) {
+    public com.google.common.util.concurrent.ListenableFuture<AirDataQuality> getDataById(
+        DataId request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_GET_DATA_BY_ID, getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<iot.rest.grpc.AirDataQuality> createData(
-        iot.rest.grpc.AirDataQuality request) {
+    public com.google.common.util.concurrent.ListenableFuture<AirDataQuality> createData(
+        AirDataQuality request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_CREATE_DATA, getCallOptions()), request);
     }
@@ -300,15 +300,15 @@ public final class AirQualityGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> deleteData(
-        iot.rest.grpc.DataId request) {
+        DataId request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_DELETE_DATA, getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<iot.rest.grpc.AirDataQuality> updateData(
-        iot.rest.grpc.AirDataQuality request) {
+    public com.google.common.util.concurrent.ListenableFuture<AirDataQuality> updateData(
+        AirDataQuality request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_UPDATE_DATA, getCallOptions()), request);
     }
@@ -332,33 +332,33 @@ public final class AirQualityGrpc {
       this.methodId = methodId;
     }
 
-    @java.lang.Override
-    @java.lang.SuppressWarnings("unchecked")
+    @Override
+    @SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_DATA_BY_ID:
-          serviceImpl.getDataById((iot.rest.grpc.DataId) request,
-              (io.grpc.stub.StreamObserver<iot.rest.grpc.AirDataQuality>) responseObserver);
+          serviceImpl.getDataById((DataId) request,
+              (io.grpc.stub.StreamObserver<AirDataQuality>) responseObserver);
           break;
         case METHODID_CREATE_DATA:
-          serviceImpl.createData((iot.rest.grpc.AirDataQuality) request,
-              (io.grpc.stub.StreamObserver<iot.rest.grpc.AirDataQuality>) responseObserver);
+          serviceImpl.createData((AirDataQuality) request,
+              (io.grpc.stub.StreamObserver<AirDataQuality>) responseObserver);
           break;
         case METHODID_DELETE_DATA:
-          serviceImpl.deleteData((iot.rest.grpc.DataId) request,
+          serviceImpl.deleteData((DataId) request,
               (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
           break;
         case METHODID_UPDATE_DATA:
-          serviceImpl.updateData((iot.rest.grpc.AirDataQuality) request,
-              (io.grpc.stub.StreamObserver<iot.rest.grpc.AirDataQuality>) responseObserver);
+          serviceImpl.updateData((AirDataQuality) request,
+              (io.grpc.stub.StreamObserver<AirDataQuality>) responseObserver);
           break;
         default:
           throw new AssertionError();
       }
     }
 
-    @java.lang.Override
-    @java.lang.SuppressWarnings("unchecked")
+    @Override
+    @SuppressWarnings("unchecked")
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
@@ -369,9 +369,9 @@ public final class AirQualityGrpc {
   }
 
   private static final class AirQualityDescriptorSupplier implements io.grpc.protobuf.ProtoFileDescriptorSupplier {
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return iot.rest.grpc.Airquality.getDescriptor();
+      return Airquality.getDescriptor();
     }
   }
 
