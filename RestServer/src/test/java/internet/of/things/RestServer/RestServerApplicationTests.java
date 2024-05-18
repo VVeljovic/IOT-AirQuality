@@ -1,4 +1,4 @@
-package iot.rest.RestServer;
+package internet.of.things.RestServer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

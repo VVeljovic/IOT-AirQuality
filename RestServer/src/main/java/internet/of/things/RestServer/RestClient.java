@@ -1,22 +1,22 @@
-package iot.rest.RestServer.client;
+package internet.of.things.RestServer;
 
+import GrpcServer.AirDataQuality;
+import GrpcServer.AirQualityGrpc;
+import GrpcServer.DataId;
 import com.google.protobuf.Empty;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import iot.rest.grpc.AirDataQuality;
-import iot.rest.grpc.AirQualityGrpc;
-import iot.rest.grpc.DataId;
 import org.springframework.stereotype.Component;
-
 
 @Component
 public class RestClient {
-    private ManagedChannel channel;
-    private AirQualityGrpc.AirQualityBlockingStub blockingStub;
-    public RestClient() {
-        this.channel = ManagedChannelBuilder.forAddress("127.0.0.1", 8080).usePlaintext().build();
-        this.blockingStub = AirQualityGrpc.newBlockingStub(channel);
-    }
+private ManagedChannel channel;
+private AirQualityGrpc.AirQualityBlockingStub blockingStub;
+public RestClient()
+{
+    this.channel = ManagedChannelBuilder.forAddress("127.0.0.1", 5259).usePlaintext().build();
+    this.blockingStub = AirQualityGrpc.newBlockingStub(channel);
+}
     public AirDataQuality getDataById(int id)
     {
         DataId dataId = DataId.newBuilder().setId(id).build();
@@ -35,6 +35,4 @@ public class RestClient {
     {
         return blockingStub.updateData(data);
     }
-
-
 }
