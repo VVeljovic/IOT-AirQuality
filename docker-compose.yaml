@@ -1,18 +1,41 @@
 version: '3.8'
 
 services:
-  database:
-    container_name: postgres_container
+  postgres:
+    container_name: postgres
     image: postgres
     restart: always
     environment:
-      POSTGRES_DB: iot
+      POSTGRES_DB: Internet of things
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: Veljko22!!!
     ports:
       - "5433:5432"
     networks:
       - iot
+  dotnetapp:
+    container_name: dotnet
+    build:
+      context: C:\Users\veljk\OneDrive\Desktop\Cetvrta godina\IOT\IOT-AirQuality\GrpcServer
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - iot
+
+  springbootapp:
+      container_name: springboot
+      build:
+        context: C:\Users\veljk\OneDrive\Desktop\Cetvrta godina\IOT\IOT-AirQuality\RestServer
+        dockerfile: Dockerfile
+      ports:
+        - "5050:8080"
+      networks:
+        - iot
+    
+    
  
 networks:
   iot:
