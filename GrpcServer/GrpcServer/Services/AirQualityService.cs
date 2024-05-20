@@ -9,30 +9,25 @@ namespace GrpcServer.Services
 {
     public class AirQualityService : AirQuality.AirQualityBase
     {
-        private readonly ILogger<AirQualityService> _logger;    
+        private readonly ILogger<AirQualityService> _logger;
         public DBContext DBContext { get; private set; }
-        public AirQualityService(DBContext context ) { this.DBContext = context; }
-        public override Task<Hellow> fja(Hellow request, ServerCallContext context)
-        {
-            return Task.FromResult(new Hellow
-            {
-                Name = "Hello" + request.Name
-            });
-        }
+        public AirQualityService(DBContext context) { this.DBContext = context; }
+
         public override async Task<AirDataQuality> getDataById(DataId request, ServerCallContext context)
         {
             try
             {
                 int id = request.Id;
-                var airDataQuality = DBContext.airQualities.FirstOrDefault(aDQ=>aDQ.Id == id);
-                if(airDataQuality != null ) {
+                var airDataQuality = DBContext.airQualities.FirstOrDefault(aDQ => aDQ.Id == id);
+                if (airDataQuality != null)
+                {
                     DateTime utcDateTime = airDataQuality.Date.ToUniversalTime();
 
                     return await Task.FromResult(new AirDataQuality
                     {
                         Id = airDataQuality.Id,
                         Date = Timestamp.FromDateTime(utcDateTime),
-                        Time = Duration.FromTimeSpan( airDataQuality.Time),
+                        Time = Duration.FromTimeSpan(airDataQuality.Time),
                         CoGt = airDataQuality.CO_GT,
                         Pt08S1Co = airDataQuality.PT08_S1_CO,
                         NmhcGt = airDataQuality.NMHC_GT,
@@ -42,11 +37,11 @@ namespace GrpcServer.Services
                         Pt08S3Nox = airDataQuality.PT08_S3_NOx,
                         No2Gt = airDataQuality.NO2_GT,
                         Pt08S4No2 = airDataQuality.PT08_S4_NO2,
-                        Pt08S5O3=airDataQuality.PT08_S5_O3,
-                        T=airDataQuality.T,
-                        Rh=airDataQuality.RH,
+                        Pt08S5O3 = airDataQuality.PT08_S5_O3,
+                        T = airDataQuality.T,
+                        Rh = airDataQuality.RH,
                         Ah = airDataQuality.AH
-                    }) ;
+                    });
                 }
                 else
                 {
@@ -90,26 +85,26 @@ namespace GrpcServer.Services
 
                 throw;
             }
-                   
+
         }
         public override async Task<Empty> deleteData(DataId request, ServerCallContext context)
         {
-            
-                var data = await DBContext.airQualities.FirstOrDefaultAsync(x => x.Id == request.Id);
-                if(data== null)
-                {
+
+            var data = await DBContext.airQualities.FirstOrDefaultAsync(x => x.Id == request.Id);
+            if (data == null)
+            {
                 throw new RpcException(new Status(StatusCode.NotFound, "Data not found"));
-                }
+            }
             DBContext.airQualities.Remove(data);
             await DBContext.SaveChangesAsync();
             return await Task.FromResult(new Empty());
 
-           
+
         }
         public override async Task<AirDataQuality> updateData(AirDataQuality request, ServerCallContext context)
         {
             var data = await DBContext.airQualities.FindAsync(request.Id);
-            if(data == null)
+            if (data == null)
             {
                 throw new RpcException(new Status(StatusCode.NotFound, "Data not found"));
             }
@@ -135,7 +130,124 @@ namespace GrpcServer.Services
 
             }
         }
+        public override async Task<AirDataQuality> MinDataValueInRange(DateRange request, ServerCallContext context)
+        {
+            var startDate = request.StartDate.ToDateTime();
+            var endDate = request.EndDate.ToDateTime();
+            var propertyName = request.PropertyName;
 
+            var airData = await DBContext.airQualities.Where(
+                x => x.Date >= startDate && x.Date <= endDate).ToListAsync();
+
+            if (airData.Count == 0)
+            {
+                return null;
+            }
+
+            var propertyInfo = typeof(AirQualityData).GetProperty(propertyName);
+            if (propertyInfo == null)
+            {
+                throw new ArgumentException($"Property '{propertyName}' does not exist on type 'AirQuality'.");
+            }
+
+            var sortedAirData = airData.OrderBy(x => propertyInfo.GetValue(x)).ToList();
+
+            var airDataQuality = sortedAirData.FirstOrDefault();
+
+            DateTime utcDateTime = airDataQuality.Date.ToUniversalTime();
+            return await Task.FromResult(new AirDataQuality
+            {
+                Id = airDataQuality.Id,
+                Date = Timestamp.FromDateTime(utcDateTime),
+                Time = Duration.FromTimeSpan(airDataQuality.Time),
+                CoGt = airDataQuality.CO_GT,
+                Pt08S1Co = airDataQuality.PT08_S1_CO,
+                NmhcGt = airDataQuality.NMHC_GT,
+                C6H6Gt = airDataQuality.C6H6_GT,
+                Pt08S2Nmhc = airDataQuality.PT08_S2_NMHC,
+                NoxGt = airDataQuality.NOx_GT,
+                Pt08S3Nox = airDataQuality.PT08_S3_NOx,
+                No2Gt = airDataQuality.NO2_GT,
+                Pt08S4No2 = airDataQuality.PT08_S4_NO2,
+                Pt08S5O3 = airDataQuality.PT08_S5_O3,
+                T = airDataQuality.T,
+                Rh = airDataQuality.RH,
+                Ah = airDataQuality.AH
+            });
+        }
+        public override async Task<AirDataQuality> MaxDataValueInRange(DateRange request, ServerCallContext context)
+        {
+            var startDate = request.StartDate.ToDateTime();
+            var endDate = request.EndDate.ToDateTime();
+            var propertyName = request.PropertyName;
+
+            var airData = await DBContext.airQualities.Where(
+                x => x.Date >= startDate && x.Date <= endDate).ToListAsync();
+
+            if (airData.Count == 0)
+            {
+                return null;
+            }
+
+            var propertyInfo = typeof(AirQualityData).GetProperty(propertyName);
+            if (propertyInfo == null)
+            {
+                throw new ArgumentException($"Property '{propertyName}' does not exist on type 'AirQuality'.");
+            }
+
+            var sortedAirData = airData.OrderBy(x => propertyInfo.GetValue(x)).ToList();
+
+            var airDataQuality = sortedAirData.LastOrDefault();
+
+            DateTime utcDateTime = airDataQuality.Date.ToUniversalTime();
+            return await Task.FromResult(new AirDataQuality
+            {
+                Id = airDataQuality.Id,
+                Date = Timestamp.FromDateTime(utcDateTime),
+                Time = Duration.FromTimeSpan(airDataQuality.Time),
+                CoGt = airDataQuality.CO_GT,
+                Pt08S1Co = airDataQuality.PT08_S1_CO,
+                NmhcGt = airDataQuality.NMHC_GT,
+                C6H6Gt = airDataQuality.C6H6_GT,
+                Pt08S2Nmhc = airDataQuality.PT08_S2_NMHC,
+                NoxGt = airDataQuality.NOx_GT,
+                Pt08S3Nox = airDataQuality.PT08_S3_NOx,
+                No2Gt = airDataQuality.NO2_GT,
+                Pt08S4No2 = airDataQuality.PT08_S4_NO2,
+                Pt08S5O3 = airDataQuality.PT08_S5_O3,
+                T = airDataQuality.T,
+                Rh = airDataQuality.RH,
+                Ah = airDataQuality.AH
+            });
+        }
+        public override async Task<AverageData> AverageDataValueInRange(DateRange request, ServerCallContext context)
+        {
+            var startDate = request.StartDate.ToDateTime();
+            var endDate = request.EndDate.ToDateTime();
+            var propertyName = request.PropertyName;
+            var averageValue = await DBContext.airQualities
+                .Where(x => x.Date >= startDate && x.Date <= endDate)
+                .AverageAsync(x => EF.Property<double>(x, propertyName));
+            return await Task.FromResult(new AverageData
+            {
+                PropertyName = propertyName,
+                AverageValue = (float)averageValue
+            });
+        }
+        public override async Task<SumData> SumDataValueInRange(DateRange request, ServerCallContext context)
+        {
+            var startDate = request.StartDate.ToDateTime();
+            var endDate = request.EndDate.ToDateTime();
+            var propertyName = request.PropertyName;
+            var averageValue = await DBContext.airQualities
+                .Where(x => x.Date >= startDate && x.Date <= endDate)
+                .SumAsync(x => EF.Property<double>(x, propertyName));
+            return await Task.FromResult(new SumData
+            {
+                PropertyName = propertyName,
+                SumValue = (float)averageValue
+            });
+        }
     }
-   
+    
 }

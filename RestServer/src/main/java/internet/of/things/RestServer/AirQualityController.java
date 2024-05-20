@@ -1,6 +1,8 @@
 package internet.of.things.RestServer;
 
 import GrpcServer.AirDataQuality;
+import GrpcServer.AverageData;
+import GrpcServer.SumData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.protobuf.Duration;
 import com.google.protobuf.Timestamp;
@@ -9,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 
 @RestController
 @RequestMapping(path="airquality")
@@ -20,6 +24,7 @@ public class AirQualityController {
         this.restClient = restClient;
         this.objectMapper = objectMapper;
     }
+
     @GetMapping("/getData/{id}")
     public ResponseEntity<String> getDataById(@PathVariable Integer id) {
         System.out.print("cao");
@@ -130,6 +135,71 @@ public class AirQualityController {
         {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Greška prilikom konverzije objekta u json ili u proto.");
+        }
+
+    }
+    @GetMapping("/minDataInRange")
+    public ResponseEntity<String> getMinDataInRange(
+            @RequestParam("start") String start,
+            @RequestParam("end") String end,
+            @RequestParam("property") String propertyName) throws ParseException {
+        AirDataQuality data = restClient.getMinDataInRange(start,end,propertyName);
+        try{
+            String jsonData = JsonFormat.printer().print(data);
+            return ResponseEntity.ok(jsonData);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Greška prilikom konverzije objekta u json.");
+        }
+    }
+    @GetMapping("/maxDataInRange")
+    public ResponseEntity<String> getMaxDataInRange(
+            @RequestParam("start") String start,
+            @RequestParam("end") String end,
+            @RequestParam("property") String propertyName) throws ParseException {
+        AirDataQuality data = restClient.getMaxDataInRange(start,end,propertyName);
+        try{
+            String jsonData = JsonFormat.printer().print(data);
+            return ResponseEntity.ok(jsonData);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Greška prilikom konverzije objekta u json.");
+        }
+    }
+    @GetMapping("/getAvgValue")
+    public ResponseEntity<String> getAvgValueOfPropertyInRange(
+            @RequestParam("start") String start,
+            @RequestParam("end") String end,
+            @RequestParam("property") String propertyName) throws ParseException {
+        AverageData data = restClient.getAvgValueOfPropertyInRange(start,end,propertyName);
+        try{
+            String jsonData = JsonFormat.printer().print(data);
+            return ResponseEntity.ok(jsonData);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Greška prilikom konverzije objekta u json.");
+        }
+    }
+    @GetMapping("/getSumValue")
+    public ResponseEntity<String> getSumValueOfPropertyInRange(
+            @RequestParam("start") String start,
+            @RequestParam("end") String end,
+            @RequestParam("property") String propertyName) throws ParseException {
+        SumData data = restClient.getSumValueOfPropertyInRange(start,end,propertyName);
+        try{
+            String jsonData = JsonFormat.printer().print(data);
+            return ResponseEntity.ok(jsonData);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Greška prilikom konverzije objekta u json.");
         }
     }
 }

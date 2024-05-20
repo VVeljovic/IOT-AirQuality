@@ -1,0 +1,25 @@
+-- Table: public.air_quality
+
+-- DROP TABLE IF EXISTS public.air_quality;
+
+CREATE TABLE IF NOT EXISTS air_quality
+(
+    "Date" date,
+    "Time" time without time zone,
+    "CO_GT" double precision,
+    "PT08_S1_CO" integer,
+    "NMHC_GT" integer,
+    "C6H6_GT" double precision,
+    "PT08_S2_NMHC" integer,
+    "NOx_GT" integer,
+    "PT08_S3_NOx" integer,
+    "NO2_GT" integer,
+    "PT08_S4_NO2" integer,
+    "PT08_S5_O3" integer,
+    "T" double precision,
+    "RH" double precision,
+    "AH" double precision
+)
+
+SET datestyle = 'ISO, DMY';
+\copy air_quality FROM 'C:\Users\veljk\OneDrive\Desktop\AirQuality.csv' DELIMITER ',' CSV HEADER;
