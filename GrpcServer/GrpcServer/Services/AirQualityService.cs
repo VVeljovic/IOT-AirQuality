@@ -1,8 +1,11 @@
-﻿using Google.Protobuf.WellKnownTypes;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using GrpcServer.ContextDB;
 using GrpcServer.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GrpcServer.Services
@@ -10,15 +13,71 @@ namespace GrpcServer.Services
     public class AirQualityService : AirQuality.AirQualityBase
     {
         private readonly ILogger<AirQualityService> _logger;
-        public DBContext DBContext { get; private set; }
-        public AirQualityService(DBContext context) { this.DBContext = context; }
+        List<AirQualityData> airQualityarrayFromCsv = new List<AirQualityData>();
+        public DBContext dbContext { get; private set; }
+        private void loadFromCsv()
+        {
+            var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
+            { HasHeaderRecord = false };
+            string csvFilePath = "/grpcServer/config/AirQuality.csv";
+            using (var reader = new StreamReader(csvFilePath))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                while (csv.Read())
+                {
+                    var record = csv.GetRecord<AirQualityData>();
+                    airQualityarrayFromCsv.Add(record);
+                    
+                }
+
+            }
+        }
+        public AirQualityService(DBContext context) { 
+            dbContext = context; 
+            if(dbContext.Database.EnsureCreated())
+            {
+                loadFromCsv();
+                
+               
+                    foreach (var airQuality in airQualityarrayFromCsv)
+                    {
+                        var date = DateTime.ParseExact(airQuality.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        var time = TimeSpan.ParseExact(airQuality.Time, "hh\\:mm\\:ss", CultureInfo.InvariantCulture);
+
+
+                        var airQualityDataDbModel = new AirQualityDataDbModel
+                        {
+                            Date = date,
+                            Time = time,
+                            CO_GT = airQuality.CO_GT,
+                            PT08_S1_CO = airQuality.PT08_S1_CO,
+                            NMHC_GT = airQuality.NMHC_GT,
+                            C6H6_GT = airQuality.C6H6_GT,
+                            PT08_S2_NMHC = airQuality.PT08_S2_NMHC,
+                            NOx_GT = airQuality.NOx_GT,
+                            PT08_S3_NOx = airQuality.PT08_S3_NOx,
+                            NO2_GT = airQuality.NO2_GT,
+                            PT08_S4_NO2 = airQuality.PT08_S4_NO2,
+                            PT08_S5_O3 = airQuality.PT08_S5_O3,
+                            T = airQuality.T,
+                            RH = airQuality.RH,
+                            AH = airQuality.AH
+                        };
+
+                        context.airQualities.Add(airQualityDataDbModel);
+                    
+
+                    context.SaveChanges();
+                }
+            }
+        }
 
         public override async Task<AirDataQuality> getDataById(DataId request, ServerCallContext context)
         {
             try
             {
                 int id = request.Id;
-                var airDataQuality = DBContext.airQualities.FirstOrDefault(aDQ => aDQ.Id == id);
+                var airDataQuality = dbContext.airQualities.FirstOrDefault(aDQ => aDQ.Id == id);
                 if (airDataQuality != null)
                 {
                     DateTime utcDateTime = airDataQuality.Date.ToUniversalTime();
@@ -58,7 +117,7 @@ namespace GrpcServer.Services
         {
             try
             {
-                var airDataQuality = new AirQualityData
+                var airDataQuality = new AirQualityDataDbModel
                 {
                     Date = request.Date.ToDateTime(),
                     Time = request.Time.ToTimeSpan(),
@@ -76,8 +135,8 @@ namespace GrpcServer.Services
                     RH = request.Rh,
                     AH = request.Ah
                 };
-                DBContext.airQualities.AddAsync(airDataQuality);
-                DBContext.SaveChangesAsync();
+                dbContext.airQualities.AddAsync(airDataQuality);
+                dbContext.SaveChangesAsync();
                 return await Task.FromResult(request);
             }
             catch (Exception ex)
@@ -90,20 +149,20 @@ namespace GrpcServer.Services
         public override async Task<Empty> deleteData(DataId request, ServerCallContext context)
         {
 
-            var data = await DBContext.airQualities.FirstOrDefaultAsync(x => x.Id == request.Id);
+            var data = await dbContext.airQualities.FirstOrDefaultAsync(x => x.Id == request.Id);
             if (data == null)
             {
                 throw new RpcException(new Status(StatusCode.NotFound, "Data not found"));
             }
-            DBContext.airQualities.Remove(data);
-            await DBContext.SaveChangesAsync();
+            dbContext.airQualities.Remove(data);
+            await dbContext.SaveChangesAsync();
             return await Task.FromResult(new Empty());
 
 
         }
         public override async Task<AirDataQuality> updateData(AirDataQuality request, ServerCallContext context)
         {
-            var data = await DBContext.airQualities.FindAsync(request.Id);
+            var data = await dbContext.airQualities.FindAsync(request.Id);
             if (data == null)
             {
                 throw new RpcException(new Status(StatusCode.NotFound, "Data not found"));
@@ -125,7 +184,7 @@ namespace GrpcServer.Services
                 data.T = request.T;
                 data.RH = request.Rh;
                 data.AH = request.Ah;
-                await DBContext.SaveChangesAsync();
+                await dbContext.SaveChangesAsync();
                 return await Task.FromResult(request);
 
             }
@@ -136,7 +195,7 @@ namespace GrpcServer.Services
             var endDate = request.EndDate.ToDateTime();
             var propertyName = request.PropertyName;
 
-            var airData = await DBContext.airQualities.Where(
+            var airData = await dbContext.airQualities.Where(
                 x => x.Date >= startDate && x.Date <= endDate).ToListAsync();
 
             if (airData.Count == 0)
@@ -144,7 +203,7 @@ namespace GrpcServer.Services
                 return null;
             }
 
-            var propertyInfo = typeof(AirQualityData).GetProperty(propertyName);
+            var propertyInfo = typeof(AirQualityDataDbModel).GetProperty(propertyName);
             if (propertyInfo == null)
             {
                 throw new ArgumentException($"Property '{propertyName}' does not exist on type 'AirQuality'.");
@@ -181,7 +240,7 @@ namespace GrpcServer.Services
             var endDate = request.EndDate.ToDateTime();
             var propertyName = request.PropertyName;
 
-            var airData = await DBContext.airQualities.Where(
+            var airData = await dbContext.airQualities.Where(
                 x => x.Date >= startDate && x.Date <= endDate).ToListAsync();
 
             if (airData.Count == 0)
@@ -189,7 +248,7 @@ namespace GrpcServer.Services
                 return null;
             }
 
-            var propertyInfo = typeof(AirQualityData).GetProperty(propertyName);
+            var propertyInfo = typeof(AirQualityDataDbModel).GetProperty(propertyName);
             if (propertyInfo == null)
             {
                 throw new ArgumentException($"Property '{propertyName}' does not exist on type 'AirQuality'.");
@@ -225,7 +284,7 @@ namespace GrpcServer.Services
             var startDate = request.StartDate.ToDateTime();
             var endDate = request.EndDate.ToDateTime();
             var propertyName = request.PropertyName;
-            var averageValue = await DBContext.airQualities
+            var averageValue = await dbContext.airQualities
                 .Where(x => x.Date >= startDate && x.Date <= endDate)
                 .AverageAsync(x => EF.Property<double>(x, propertyName));
             return await Task.FromResult(new AverageData
@@ -239,7 +298,7 @@ namespace GrpcServer.Services
             var startDate = request.StartDate.ToDateTime();
             var endDate = request.EndDate.ToDateTime();
             var propertyName = request.PropertyName;
-            var averageValue = await DBContext.airQualities
+            var averageValue = await dbContext.airQualities
                 .Where(x => x.Date >= startDate && x.Date <= endDate)
                 .SumAsync(x => EF.Property<double>(x, propertyName));
             return await Task.FromResult(new SumData

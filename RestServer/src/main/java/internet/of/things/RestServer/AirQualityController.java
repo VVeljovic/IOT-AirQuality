@@ -27,12 +27,15 @@ public class AirQualityController {
 
     @GetMapping("/getData/{id}")
     public ResponseEntity<String> getDataById(@PathVariable Integer id) {
-        System.out.print("cao");
+
         AirDataQuality data = restClient.getDataById(id);
-        System.out.print("2222222222");
+
 
         try{
             String jsonData = JsonFormat.printer().print(data);
+            long seconds = data.getTime().getSeconds();
+            String formattedTime = convertSecondsToHHMMSS(seconds);
+            jsonData = jsonData.replace("\"" + seconds + "s\"", "\"" + formattedTime + "\"");
             return ResponseEntity.ok(jsonData);
         }
         catch (Exception e)
@@ -49,7 +52,7 @@ public class AirQualityController {
             long miliseconds = data.getDate().getTime();
             int nanos = (int)((miliseconds%1000)*1000000);
             Timestamp timestamp = Timestamp.newBuilder().setSeconds(miliseconds/1000).setNanos(nanos).build();
-            miliseconds = data.getTime().getTime()+3600000;
+            miliseconds = data.getTime().getTime();
             nanos = (int)((miliseconds%1000)*1000000);
             Duration duration = Duration.newBuilder().setSeconds(miliseconds/1000).setNanos(nanos).build();
             AirDataQuality.Builder builder = AirDataQuality.newBuilder();
@@ -70,10 +73,11 @@ public class AirQualityController {
             builder.setRh(data.getRh());
             builder.setAh(data.getAh());
             AirDataQuality airDataQuality = builder.build();
-
-
             AirDataQuality result = restClient.createData(airDataQuality);
             String jsonData = JsonFormat.printer().print(result);
+            long seconds = result.getTime().getSeconds();
+            String formattedTime = convertSecondsToHHMMSS(seconds);
+            jsonData = jsonData.replace("\"" + seconds + "s\"", "\"" + formattedTime + "\"");
             return ResponseEntity.ok(jsonData);
 
 
@@ -101,7 +105,7 @@ public class AirQualityController {
             long miliseconds = data.getDate().getTime();
             int nanos = (int)((miliseconds%1000)*1000000);
             Timestamp timestamp = Timestamp.newBuilder().setSeconds(miliseconds/1000).setNanos(nanos).build();
-            miliseconds = data.getTime().getTime()+3600000;
+            miliseconds = data.getTime().getTime();
             nanos = (int)((miliseconds%1000)*1000000);
             Duration duration = Duration.newBuilder().setSeconds(miliseconds/1000).setNanos(nanos).build();
             AirDataQuality.Builder builder = AirDataQuality.newBuilder();
@@ -126,6 +130,9 @@ public class AirQualityController {
 
             AirDataQuality result = restClient.updateData(airDataQuality);
             String jsonData = JsonFormat.printer().print(result);
+            long seconds = result.getTime().getSeconds();
+            String formattedTime = convertSecondsToHHMMSS(seconds);
+            jsonData = jsonData.replace("\"" + seconds + "s\"", "\"" + formattedTime + "\"");
             return ResponseEntity.ok(jsonData);
 
 
@@ -146,6 +153,9 @@ public class AirQualityController {
         AirDataQuality data = restClient.getMinDataInRange(start,end,propertyName);
         try{
             String jsonData = JsonFormat.printer().print(data);
+            long seconds = data.getTime().getSeconds();
+            String formattedTime = convertSecondsToHHMMSS(seconds);
+            jsonData = jsonData.replace("\"" + seconds + "s\"", "\"" + formattedTime + "\"");
             return ResponseEntity.ok(jsonData);
         }
         catch (Exception e)
@@ -162,6 +172,9 @@ public class AirQualityController {
         AirDataQuality data = restClient.getMaxDataInRange(start,end,propertyName);
         try{
             String jsonData = JsonFormat.printer().print(data);
+            long seconds = data.getTime().getSeconds();
+            String formattedTime = convertSecondsToHHMMSS(seconds);
+            jsonData = jsonData.replace("\"" + seconds + "s\"", "\"" + formattedTime + "\"");
             return ResponseEntity.ok(jsonData);
         }
         catch (Exception e)
@@ -202,4 +215,12 @@ public class AirQualityController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Greška prilikom konverzije objekta u json.");
         }
     }
+    private String convertSecondsToHHMMSS(long seconds)
+    {
+        long hours = seconds / 3600;
+        long minutes = (seconds % 3600) / 60;
+        long secs = seconds % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, secs);
+    }
+
 }

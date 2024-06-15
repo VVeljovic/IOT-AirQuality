@@ -1,5 +1,6 @@
 ﻿using GrpcServer.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 namespace GrpcServer.ContextDB
 {
     public class DBContext : DbContext
@@ -10,6 +11,15 @@ namespace GrpcServer.ContextDB
         {
             optionsBuilder.UseNpgsql(_configuration.GetConnectionString("Database"));
         }
-        public DbSet<AirQualityData> airQualities { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AirQualityDataDbModel>()
+             .Property(e => e.Date)
+             .HasConversion(
+                 v => v.ToString("yyyy-MM-dd"),
+                 v => DateTime.ParseExact(v, "yyyy-MM-dd", CultureInfo.InvariantCulture));
+
+        }
+        public DbSet<AirQualityDataDbModel> airQualities { get; set; }
     }
 }

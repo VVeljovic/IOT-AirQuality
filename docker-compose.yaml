@@ -1,12 +1,12 @@
 version: '3.8'
 
 services:
-  postgres:
-    container_name: postgres
+  postgress:
+    container_name: postgress
     image: postgres
     restart: always
     environment:
-      POSTGRES_DB: Internet of things
+      POSTGRES_DB: IOT1
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: Veljko22!!!
     ports:
@@ -21,9 +21,11 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - postgres
+      - postgress
     networks:
       - iot
+    volumes:
+        - ./AirQuality.csv:/grpcServer/config/AirQuality.csv
 
   springbootapp:
       container_name: springboot
@@ -34,6 +36,7 @@ services:
         - "5050:8080"
       networks:
         - iot
+      
     
     
  
