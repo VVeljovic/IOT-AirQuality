@@ -135,8 +135,9 @@ namespace GrpcServer.Services
                     RH = request.Rh,
                     AH = request.Ah
                 };
-                dbContext.airQualities.AddAsync(airDataQuality);
-                dbContext.SaveChangesAsync();
+                await dbContext.airQualities.AddAsync(airDataQuality);
+                await dbContext.SaveChangesAsync();
+                request.Id = airDataQuality.Id;
                 return await Task.FromResult(request);
             }
             catch (Exception ex)
