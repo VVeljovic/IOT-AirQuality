@@ -18,11 +18,10 @@ import java.text.ParseException;
 @RequestMapping(path="airquality")
 public class AirQualityController {
     private final RestClient restClient;
-    private final ObjectMapper objectMapper;
+
     @Autowired
-    public AirQualityController(RestClient restClient, ObjectMapper objectMapper) {
+    public AirQualityController(RestClient restClient) {
         this.restClient = restClient;
-        this.objectMapper = objectMapper;
     }
 
     @GetMapping("/getData/{id}")

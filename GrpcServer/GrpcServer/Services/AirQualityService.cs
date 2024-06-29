@@ -14,7 +14,7 @@ namespace GrpcServer.Services
     {
         private readonly ILogger<AirQualityService> _logger;
         List<AirQualityData> airQualityarrayFromCsv = new List<AirQualityData>();
-        public DBContext dbContext { get; private set; }
+        private DBContext dbContext { get;  set; }
         private void loadFromCsv()
         {
             var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)

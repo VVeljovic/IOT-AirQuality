@@ -26,7 +26,6 @@ services:
       - iot
     volumes:
         - ./AirQuality.csv:/grpcServer/config/AirQuality.csv
-
   springbootapp:
       container_name: springboot
       build:
@@ -36,10 +35,6 @@ services:
         - "5050:8080"
       networks:
         - iot
-      
-    
-    
- 
 networks:
   iot:
     name: iot
